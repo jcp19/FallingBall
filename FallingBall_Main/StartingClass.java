@@ -11,7 +11,6 @@ import java.math.BigInteger;
 import java.net.URL;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
-
 	private Bola bola1;
 	private URL base; // para importar imagens para vari�veis
 	// image e second: vari�veis para doubble buffering
@@ -27,13 +26,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void init() {
-
 		// Configura��o da janela
 		setSize(480, 800);
 		setBackground(Color.YELLOW);
 		setFocusable(true); // Muda automaticamente o input para a janela do
 							// jogo
-
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Falling Ball");
 		// frame.setResizable(false);
@@ -47,13 +44,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		} catch (Exception e) {
 
 		}
-
 		// Definir Sprites
 		character = getImage(base, "data/bola_direita.png");
 		picos1 = getImage(base, "data/picos1.png");
 		picos2 = getImage(base, "data/picos2.png");
 		barra = getImage(base, "data/barra_dim.png");
-
 	}
 
 	@Override
@@ -65,7 +60,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		plat3 = new Plataforma();
 		plat4 = new Plataforma();
 		jogo.start();
-
 	}
 
 	@Override
@@ -80,25 +74,21 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void run() {
-
 		while (true) {
 			if (life==true) {
 				bola1.update();
-
 				if (bola1.getCenterY() < 735 && bola1.getCenterY() > 68) {
 					plat1.update(230);
 					plat2.update(420);
 					plat3.update(614);
 					plat4.update(801);
 				}
-
 				if (bola1.getCenterY() <= plat1.getCenterY() - 70
 						&& bola1.getCenterY() >= plat1.getCenterY() - 75
 						&& bola1.getCenterX() >= plat1.getCenterX() - 65
 						&& bola1.getCenterX() <= plat1.getCenterX() + 65) {
 					bola1.setSpeedY(-5);
 					addscore();
-
 				} else if (bola1.getCenterY() <= plat2.getCenterY() - 70
 						&& bola1.getCenterY() >= plat2.getCenterY() - 75
 						&& bola1.getCenterX() >= plat2.getCenterX() - 65
@@ -121,7 +111,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					bola1.setSpeedY(5);
 					vezum = true;
 				}
-
 				movimento();
 			}else{
 				if(reset==true){
@@ -137,9 +126,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					bola1.setSpeedY(5);
 				}
 			}
-
 			repaint();
-
 			try {
 				Thread.sleep(22);
 			} catch (InterruptedException e) {
@@ -166,37 +153,34 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		 * 
 		 * }
 		 */
-
 		switch (tecla.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			tecla_esquerda = true;
-			break;
-		case KeyEvent.VK_RIGHT:
-			tecla_direita = true;
-			break;
-		case KeyEvent.VK_SPACE:
-			reset=true;
-			break;
+			case KeyEvent.VK_LEFT:
+				tecla_esquerda = true;
+				break;
+			case KeyEvent.VK_RIGHT:
+				tecla_direita = true;
+				break;
+			case KeyEvent.VK_SPACE:
+				reset=true;
+				break;
 		}
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent tecla) {
 		switch (tecla.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			tecla_esquerda = false;
-			// bola1.stop();
-			break;
-		case KeyEvent.VK_RIGHT:
-			tecla_direita = false;
-			// bola1.stop();
-			break;
-		case KeyEvent.VK_SPACE:
-			reset=false;
-			break;
+			case KeyEvent.VK_LEFT:
+				tecla_esquerda = false;
+				// bola1.stop();
+				break;
+			case KeyEvent.VK_RIGHT:
+				tecla_direita = false;
+				// bola1.stop();
+				break;
+			case KeyEvent.VK_SPACE:
+				reset=false;
+				break;
 		}
-
 	}
 
 	@Override
@@ -217,7 +201,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		paint(second);
 
 		g.drawImage(image, 0, 0, this);
-
 	}
 
 	@Override
@@ -253,7 +236,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			score++;
 			vezum = false;
 		}
-
 	}
 
 	public void movimento() {
@@ -276,9 +258,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				bola1.setSpeedY(0);
 				bola1.setCenterY(68);
 			}
-			
 			life=false;
-
 		}
 	}
 }
