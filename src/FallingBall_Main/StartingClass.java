@@ -14,7 +14,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private Bola bola1;
 	private URL base; // para importar imagens para vari�veis
 	// image e second: vari�veis para doubble buffering
-	private Image image, character, picos1, picos2, barra;
+	private Image image, character, picos1, picos2, barra, bola_esquerda, bola_direita;
 	private Graphics second;
 	private boolean vezum = true;
 	public Plataforma plat1, plat2, plat3, plat4;
@@ -23,7 +23,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private boolean tecla_esquerda = false;
 	private boolean life = true;
 	private boolean reset = false;
-
+        
 	@Override
 	public void init() {
 		// Configura��o da janela
@@ -35,7 +35,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		frame.setTitle("Falling Ball");
 		// frame.setResizable(false);
 		// frame.setLocationRelativeTo(null);//centra a janela
-
+                
 		addKeyListener(this);
 
 		// definir a base do url para importar as imagens para gr�ficos
@@ -44,11 +44,14 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		} catch (Exception e) {
 
 		}
+                
 		// Definir Sprites
 		character = getImage(base, "data/bola_direita.png");
 		picos1 = getImage(base, "data/picos1.png");
 		picos2 = getImage(base, "data/picos2.png");
 		barra = getImage(base, "data/barra_dim.png");
+                bola_esquerda = getImage(base, "data/bola_esquerda.png");
+                bola_direita = getImage(base, "data/bola_direita.png");
 	}
 
 	@Override
@@ -243,10 +246,10 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			if (tecla_esquerda == true && tecla_direita == true) {
 
 			} else if (tecla_esquerda == true) {
-				character = getImage(base, "data/bola_esquerda.png");
+				character = bola_esquerda;
 				bola1.ir_esquerda();
 			} else if (tecla_direita == true) {
-				character = getImage(base, "data/bola_direita.png");
+				character = bola_direita;
 				bola1.ir_direita();
 			} else if (tecla_esquerda == false && tecla_direita == false) {
 				bola1.stop();
