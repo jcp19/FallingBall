@@ -1,6 +1,5 @@
 package FallingBall_Main;
 
-
 import java.util.Random;
 
 public class Plataforma {
@@ -9,26 +8,19 @@ public class Plataforma {
 	boolean vez_1 = true;
 	Random r = new Random();
 	Random w = new Random();
-	
-	
 
 	public void update(int Y) {
-		if (vez_1 == true) {
+		if (vez_1) {
 			escolher();
 			centerY = Y;
 			vez_1 = false;
-
 		}
 		centerY = centerY + speedY;
 		if (centerY < 0) {
 			escolher();
 			centerY = 800;
 		}
-		
-
 	}
-
-	
 
 	private void escolher(){
 		int rand = r.nextInt(7);
@@ -54,19 +46,17 @@ public class Plataforma {
 		case 6:
 			int rand2 = w.nextInt(3);
 			switch(rand2){
-			case 0:
-				centerX=-100;
-				break;
-			case 1:
-				centerX=430;
-				break;
-			case 2:
-				centerX = 75;
-				break;
+				case 0:
+					centerX=-100;
+					break;
+				case 1:
+					centerX=430;
+					break;
+				case 2:
+					centerX = 75;
+					break;
 			}
 			break;
-			
-
 		}
 	}
 	
@@ -94,21 +84,12 @@ public class Plataforma {
 		this.speedY = speedY;
 	}
 
-
-
 	public boolean isVez_1() {
 		return vez_1;
 	}
 
-
-
 	public void setVez_1(boolean vez_1) {
 		this.vez_1 = vez_1;
 	}
-
-
-
-
-
 	
 }

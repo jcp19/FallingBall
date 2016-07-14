@@ -1,10 +1,8 @@
 package FallingBall_Main;
 
 public class Bola {
-
 	private int centerX = 240;
 	private int centerY = 200;
-
 	private int speedX = 0;
 	private int speedY = 5;
 
@@ -23,9 +21,6 @@ public class Bola {
 			speedY = 0;
 			centerY = 735;
 		}
-		
-		
-
 	}
 
 	public void ir_direita() {
