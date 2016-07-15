@@ -1,12 +1,38 @@
 package FallingBall_Main;
 
 public class Bola {
+    //Instance variables
+    private int centerX;
+    private int centerY;
+    private int speedX;
+    private int speedY;
+    
+    //Constructors
+    /**
+     * Empty constructor
+     */
+    public Bola() {
+        centerX = 240;
+        centerY = 200;
+        speedX = 0;
+        speedY = 0;
+    }
+    
+    /**
+     * Constructor by parameter
+     * @param centerX 
+     * @param centerY
+     * @param speedX
+     * @param speedY 
+     */
+    public Bola(int centerX, int centerY, int speedX, int speedY) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.speedX = speedX;
+        this.speedY = speedY;
+    }
 
-    private int centerX = 240;
-    private int centerY = 200;
-    private int speedX = 0;
-    private int speedY = 5;
-
+    //Methods
     public void update() {
         centerX = centerX + speedX;
 
