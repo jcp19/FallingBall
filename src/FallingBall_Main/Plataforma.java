@@ -6,11 +6,24 @@ public class Plataforma {
 
     /* TO-DO: include dimensions info */
     private int centerY, centerX;
-    private int speedY = -5;
-    boolean vez_1 = true;
-    Random r = new Random();
-    Random w = new Random();
-
+    private int speedY;
+    private boolean vez_1;
+    private Random r;
+    private Random w;
+    
+    //Constructors
+    /**
+     * Empty constructor
+     */
+    public Plataforma() {
+        centerY = centerX = 0;
+        speedY = -5;
+        vez_1 = true;
+        r = new Random();
+        w = new Random();
+    }
+    
+    //Methods
     public void update(int Y) {
         if (vez_1) {
             escolher();

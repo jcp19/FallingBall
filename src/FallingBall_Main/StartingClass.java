@@ -30,7 +30,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
     public void init() {
         // Configura��o da janela
         setSize(GameConstants.WINDOW_X, GameConstants.WINDOW_Y);
-        setBackground(Color.YELLOW);
+        setBackground(Color.BLACK);
         setFocusable(true); // Muda automaticamente o input para a janela do
         // jogo
         Frame frame = (Frame) this.getParent().getParent();
@@ -78,7 +78,13 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
     @Override
     public void run() {
+        long startTime, timeMillis, waitTime, totalTime;
+        int frameCount = 0, FPS = 50;
+        double averageFPS;
+        long targetTime = 1000/FPS;
+        startTime = totalTime = 0;
         while (true) {
+            startTime = System.nanoTime();
             if (life == true) {
                 bola1.update();
                 if (bola1.getCenterY() < 735 && bola1.getCenterY() > 68) {
@@ -120,10 +126,23 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
                 bola1.setSpeedY(5);
             }
             repaint();
+            timeMillis = (System.nanoTime() - startTime)/1000000;
+            waitTime = targetTime - timeMillis;
             try {
-                Thread.sleep(22);
+                Thread.sleep(waitTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            totalTime += System.nanoTime() - startTime;
+            frameCount++;
+            /* Just to check FPS, this will be erased.
+               Variables like framecount, totalTime, 
+               averageFPS wont be used */
+            if(frameCount == FPS){
+                averageFPS = 1000/((totalTime/frameCount)/1000000);
+                frameCount = 0;
+                totalTime = 0;
+                System.out.println(averageFPS); 
             }
         }
     }
