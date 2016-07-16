@@ -79,9 +79,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
     @Override
     public void run() {
         long startTime, timeMillis, waitTime, totalTime;
-        int frameCount = 0, FPS = 50;
+        int frameCount = 0;
         double averageFPS;
-        long targetTime = 1000/FPS;
+        long targetTime = 1000/GameConstants.FPS;
         startTime = totalTime = 0;
         while (true) {
             startTime = System.nanoTime();
@@ -138,7 +138,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
             /* Just to check FPS, this will be erased.
                Variables like framecount, totalTime, 
                averageFPS wont be used */
-            if(frameCount == FPS){
+            if(frameCount == GameConstants.FPS){
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount = 0;
                 totalTime = 0;
