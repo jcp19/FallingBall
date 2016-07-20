@@ -7,12 +7,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.math.BigInteger;
 import java.net.URL;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
-    private Bola bola1;
+    private Ball ball;
     private URL base; // para importar imagens para vari�veis
     // image e second: vari�veis para doubble buffering
     private Image image, character, picos1, picos2, barra, bola_esquerda, bola_direita;
@@ -57,7 +56,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
     @Override
     public void start() {
         Thread jogo = new Thread(this);
-        bola1 = new Bola();
+        ball = new Ball();
 
         for (int i = 0; i < GameConstants.PLATFORMS; i++) {
             plat[i] = new Plataforma();
@@ -86,8 +85,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
         while (true) {
             startTime = System.nanoTime();
             if (life == true) {
-                bola1.update();
-                if (bola1.getCenterY() < 735 && bola1.getCenterY() > 68) {
+                ball.update();
+                if (ball.getCenterY() < 735 && ball.getCenterY() > 68) {
 
                     int[] xs = {230, 420, 614, 801}; // move to constants 
                     for (int i = 0; i < GameConstants.PLATFORMS; i++) {
@@ -98,17 +97,17 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
                 boolean in_platform = false;
                 for (int i = 0; i < GameConstants.PLATFORMS && !in_platform; i++) {
-                    in_platform = bola1.getCenterY() <= plat[i].getCenterY() - 70
-                            && bola1.getCenterY() >= plat[i].getCenterY() - 75
-                            && bola1.getCenterX() >= plat[i].getCenterX() - 65
-                            && bola1.getCenterX() <= plat[i].getCenterX() + 65;
+                    in_platform = ball.getCenterY() <= plat[i].getCenterY() - 70
+                            && ball.getCenterY() >= plat[i].getCenterY() - 75
+                            && ball.getCenterX() >= plat[i].getCenterX() - 65
+                            && ball.getCenterX() <= plat[i].getCenterX() + 65;
                 }
 
                 if (in_platform) {
-                    bola1.setSpeedY(-5);
+                    ball.setSpeedY(-5);
                     addscore();
                 } else {
-                    bola1.setSpeedY(5);
+                    ball.setSpeedY(5);
                     vezum = true;
                 }
                 movimento();
@@ -121,9 +120,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
                     plat[i].setVez_1(true);
                 }
 
-                bola1.setCenterX(240);
-                bola1.setCenterY(200);
-                bola1.setSpeedY(5);
+                ball.setCenterX(240);
+                ball.setCenterY(200);
+                ball.setSpeedY(5);
             }
             repaint();
             timeMillis = (System.nanoTime() - startTime)/1000000;
@@ -151,15 +150,15 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
     @Override
     public void keyPressed(KeyEvent tecla) {
         /*
-		 * if (bola1.getCenterY() < 735 && bola1.getCenterY()>68) { switch
+		 * if (ball.getCenterY() < 735 && ball.getCenterY()>68) { switch
 		 * (tecla.getKeyCode()) { case KeyEvent.VK_LEFT: character =
 		 * getImage(base, "data/bola_esquerda - C�pia.png");
-		 * bola1.ir_esquerda();
+		 * ball.ir_esquerda();
 		 * 
 		 * break; case KeyEvent.VK_RIGHT: character = getImage(base,
 		 * "data/bola_direita.png");
 		 * 
-		 * bola1.ir_direita();
+		 * ball.ir_direita();
 		 * 
 		 * break; }
 		 * 
@@ -183,11 +182,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
         switch (tecla.getKeyCode()) {
             case KeyEvent.VK_LEFT:
                 tecla_esquerda = false;
-                // bola1.stop();
+                // ball.stop();
                 break;
             case KeyEvent.VK_RIGHT:
                 tecla_direita = false;
-                // bola1.stop();
+                // ball.stop();
                 break;
             case KeyEvent.VK_SPACE:
                 reset = false;
@@ -227,8 +226,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
             }
             g.drawImage(picos1, 0, 770, this);
             g.drawImage(picos2, 0, 0, this);
-            g.drawImage(character, bola1.getCenterX() - 48,
-                    bola1.getCenterY() - 48, this);
+            g.drawImage(character, ball.getCenterX() - 48,
+                    ball.getCenterY() - 48, this);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, GameConstants.WINDOW_X, GameConstants.WINDOW_Y);
@@ -247,24 +246,24 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
     }
 
     public void movimento() {
-        if (bola1.getCenterY() < 735 && bola1.getCenterY() > 68) {
+        if (ball.getCenterY() < 735 && ball.getCenterY() > 68) {
             if (tecla_esquerda == true && tecla_direita == true) {
 
             } else if (tecla_esquerda == true) {
                 character = bola_esquerda;
-                bola1.ir_esquerda();
+                ball.ir_esquerda();
             } else if (tecla_direita == true) {
                 character = bola_direita;
-                bola1.ir_direita();
+                ball.ir_direita();
             } else if (tecla_esquerda == false && tecla_direita == false) {
-                bola1.stop();
+                ball.stop();
             }
         } else {
-            bola1.stop();
+            ball.stop();
 
-            if (bola1.getCenterY() <= 68) {
-                bola1.setSpeedY(0);
-                bola1.setCenterY(68);
+            if (ball.getCenterY() <= 68) {
+                ball.setSpeedY(0);
+                ball.setCenterY(68);
             }
             life = false;
         }

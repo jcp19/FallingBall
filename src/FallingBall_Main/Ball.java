@@ -1,21 +1,26 @@
 package FallingBall_Main;
 
-public class Bola {
+public class Ball {
     //Instance variables
     private int centerX;
     private int centerY;
     private int speedX;
     private int speedY;
+    private int acceleration;
+    
+    public static final int riseSpeed = 5;
+    public static final int initialFallingSpeed = -5;
     
     //Constructors
     /**
      * Empty constructor
      */
-    public Bola() {
-        centerX = 240;
-        centerY = 200;
+    public Ball() {
+        centerX = GameConstants.STANDARD_BALL_CENTER_X;
+        centerY = GameConstants.STANDARD_BALL_CENTER_Y;
         speedX = 0;
         speedY = 0;
+        /* substitute previous ones by fall() ?? */
     }
     
     /**
@@ -25,7 +30,7 @@ public class Bola {
      * @param speedX
      * @param speedY 
      */
-    public Bola(int centerX, int centerY, int speedX, int speedY) {
+    public Ball(int centerX, int centerY, int speedX, int speedY) {
         this.centerX = centerX;
         this.centerY = centerY;
         this.speedX = speedX;
@@ -95,4 +100,12 @@ public class Bola {
         this.speedY = speedY;
     }
     // getters e setters
+    
+    public void fall(){
+        this.speedY = initialFallingSpeed;
+    }
+    
+    public void rise(){
+        this.speedY = riseSpeed;
+    }
 }
